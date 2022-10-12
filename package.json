@@ -20,7 +20,15 @@
     "parse-bearer-token": "^1.0.1",
     "random-seed": "^0.3.0",
     "react": "^18.0.0",
-    "react-dom": "^18.0.0"
+    "react-dom": "^18.0.0",
+    "@sendgrid/mail": "^7.6.2",
+    "airtable": "^0.11.3",
+    "algoliasearch": "^4.13.0",
+    "ava": "^4.1.0",
+    "cloudinary": "^1.29.0",
+    "cors": "^2.8.5",
+    "esbuild-node-loader": "^0.8.0",
+    "yup": "^0.32.11"
   },
   "devDependencies": {
     "@types/node": "^17.0.27",
