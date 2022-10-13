@@ -18,6 +18,7 @@ export class Auth {
   async push() {
     this.ref.update(this.data);
   }
+
   isCodeExpires() {
     const now = new Date();
 
@@ -35,15 +36,18 @@ export class Auth {
       return null;
     }
   }
+
   static async createNewAuth(data) {
     const newUserSnap = await collection.add(data);
     const newUser = new Auth(newUserSnap.id);
     newUser.data = data;
     return newUser;
   }
+
   static cleanEmail(email: string) {
     return email.trim().toLowerCase();
   }
+
   static async findByEmailByCode(email: string, code: number) {
     const cleanEmail = Auth.cleanEmail(email);
 
