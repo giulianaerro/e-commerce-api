@@ -17,7 +17,7 @@ export async function newOrder({ aditionalInfo, productId, userId, status }) {
       {
         title: productById.title,
         description: productById.description,
-        picture_url: productById.Images[0].url,
+        picture_url: productById.image[0].url,
         category_id: productById.category,
         quantity: 1,
         currency_id: "ARS",
@@ -31,5 +31,15 @@ export async function newOrder({ aditionalInfo, productId, userId, status }) {
     },
   });
 
-  return pref.init_point;
+  return { url: pref.init_point, orderId: pref.external_reference };
+}
+
+export async function getOrderById(id: string) {
+  const product = await Order.getOrderById(id);
+  return product;
+}
+
+export async function getUserOrdersById(userId: string) {
+  const orders = await Order.getUserOrdersById(userId);
+  return orders;
 }

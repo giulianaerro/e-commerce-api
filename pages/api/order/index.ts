@@ -14,7 +14,7 @@ async function postHandler(req: NextApiRequest, res: NextApiResponse, token) {
     status: "pending",
   });
 
-  res.send({ url: order });
+  res.send({ url: order.url, orderId: order.orderId });
 }
 
 const handler = method({

@@ -4,8 +4,6 @@ import { airtableBase } from "lib/airtable";
 import { productsIndex } from "lib/algolia";
 
 export default function (req: NextApiRequest, res: NextApiResponse) {
-  //   const { offset, limit } = getOfferAndLimitFromReq(req, 100, 10000);
-
   airtableBase("Furniture")
     .select({
       pageSize: 10,
@@ -19,7 +17,6 @@ export default function (req: NextApiRequest, res: NextApiResponse) {
           };
         });
         await productsIndex.saveObjects(objects);
-        console.log("siguiente pagina");
 
         fetchNextPage();
       },
@@ -28,7 +25,7 @@ export default function (req: NextApiRequest, res: NextApiResponse) {
           console.log(err);
           return;
         }
-        res.send("termino");
+        res.send("terminó");
       }
     );
 }

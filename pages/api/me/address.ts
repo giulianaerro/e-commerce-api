@@ -3,18 +3,12 @@ import { Users } from "models/users";
 import { authMiddleware, byMethod } from "lib/middlewares";
 
 const handler = byMethod({
-  async get(req: NextApiRequest, res: NextApiResponse, token) {
-    const user = new Users(token.userId);
-    await user.pull();
-
-    res.send(user.data);
-  },
   async patch(req: NextApiRequest, res: NextApiResponse, token) {
-    const userData = new Users(token.userId);
-    userData.data = req.body;
-    await userData.push();
+    const address = new Users(token.userId);
+    address.data = req.body;
+    await address.push();
 
-    res.send(userData);
+    res.send(address);
   },
 });
 export default authMiddleware(handler);
