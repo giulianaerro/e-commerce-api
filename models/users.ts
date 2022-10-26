@@ -13,13 +13,13 @@ export class Users {
     const snap = await this.ref.get();
     this.data = snap.data();
   }
+  async push() {
+    this.ref.update(this.data);
+  }
   static async createNewUser(data) {
     const newUserSnap = await collection.add(data);
     const newUser = new Users(newUserSnap.id);
     newUser.data = data;
     return newUser;
-  }
-  async push() {
-    this.ref.update(this.data);
   }
 }

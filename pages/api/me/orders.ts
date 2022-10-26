@@ -4,9 +4,13 @@ import { getUserOrdersById } from "controller/order";
 
 const handler = byMethod({
   async get(req: NextApiRequest, res: NextApiResponse, token) {
-    const userOrders = await getUserOrdersById(token.userId);
+    try {
+      const userOrders = await getUserOrdersById(token.userId);
 
-    res.send({ userOrders });
+      res.send({ userOrders });
+    } catch (error) {
+      res.status(404).send(error);
+    }
   },
 });
 export default authMiddleware(handler);

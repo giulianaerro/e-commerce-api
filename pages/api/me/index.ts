@@ -1,20 +1,28 @@
 import type { NextApiRequest, NextApiResponse } from "next";
 import { Users } from "models/users";
 import { authMiddleware, byMethod } from "lib/middlewares";
+import { editUser } from "controller/user";
 
 const handler = byMethod({
   async get(req: NextApiRequest, res: NextApiResponse, token) {
-    const user = new Users(token.userId);
-    await user.pull();
+    try {
+      const user = new Users(token.userId);
+      await user.pull();
 
-    res.send(user.data);
+      res.send(user.data);
+    } catch (error) {
+      res.status(400).send(error);
+    }
   },
   async patch(req: NextApiRequest, res: NextApiResponse, token) {
-    const userData = new Users(token.userId);
-    userData.data = req.body;
-    await userData.push();
+    try {
+      const newData = req.body;
+      await editUser(newData, token.userId);
 
-    res.send(userData);
+      res.send("ok");
+    } catch (error) {
+      res.status(400).send(error);
+    }
   },
 });
 export default authMiddleware(handler);
