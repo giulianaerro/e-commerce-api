@@ -1,6 +1,12 @@
 const sgMail = require("@sendgrid/mail");
 sgMail.setApiKey(process.env.SENDGRID_API_KEY);
 
+type emailProps = {
+  to: string;
+  subject: string;
+  content: string;
+};
+
 export const emailMessageCode = (code) => {
   return `<!DOCTYPE html>
 <html lang="es">
@@ -55,7 +61,7 @@ export const emailMessageCode = (code) => {
 `;
 };
 
-export async function sendEmail(to, subject, content) {
+export async function sendEmail(to: string, subject: string, content: string) {
   const message = {
     to,
     from: "giuli@apx.school",
