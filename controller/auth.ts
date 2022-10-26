@@ -2,9 +2,7 @@ import { Auth } from "models/auth";
 import { Users } from "models/users";
 import gen from "random-seed";
 import { addMinutes } from "date-fns";
-
-var seed = "aisjdhfjiasf";
-var random = gen.create(seed);
+import { emailMessageCode, sendEmail } from "lib/sendgrid";
 
 export async function findOrCreateAuth(email: string): Promise<Auth> {
   const cleanEmail = email.trim().toLowerCase();
@@ -29,12 +27,18 @@ export async function findOrCreateAuth(email: string): Promise<Auth> {
 
 export async function sendCode(email: string) {
   const auth = await findOrCreateAuth(email);
-  const code = random.intBetween(10000, 99999);
+  const code = gen.create().intBetween(10000, 99999);
   auth.data.code = code;
   const now = new Date();
   const twentyMinutesFromNow = addMinutes(now, 20);
   auth.data.expires = twentyMinutesFromNow;
   await auth.push();
-  console.log("email enviado a " + email + " con codigo " + auth.data.code);
-  return true;
+  const contentEmailMessage = emailMessageCode(code);
+  const emailSent = await sendEmail(
+    email,
+    "Código de seguridad",
+    contentEmailMessage
+  );
+
+  return { emailSent };
 }

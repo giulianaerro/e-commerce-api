@@ -1,7 +1,6 @@
 import type { NextApiRequest, NextApiResponse } from "next";
-import { getOfferAndLimitFromReq } from "lib/pagination";
-import { airtableBase } from "lib/airtable";
-import { productsIndex } from "lib/algolia";
+import { airtableBase } from "./airtable";
+import { productsIndex } from "./algolia";
 
 export default function (req: NextApiRequest, res: NextApiResponse) {
   airtableBase("Furniture")
