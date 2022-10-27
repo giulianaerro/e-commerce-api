@@ -16,10 +16,20 @@ export class Users {
   async push() {
     this.ref.update(this.data);
   }
-  static async createNewUser(data) {
+  static async createNewUser(data: { email: string }) {
     const newUserSnap = await collection.add(data);
     const newUser = new Users(newUserSnap.id);
     newUser.data = data;
     return newUser;
+  }
+  static async getUserDataById(userId: string) {
+    const user = await collection.doc(userId).get();
+    if (user) {
+      const myUser = new Users(user.id);
+      myUser.data = user.data();
+      return myUser;
+    } else {
+      throw "El userId no existe";
+    }
   }
 }

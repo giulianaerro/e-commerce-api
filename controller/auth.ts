@@ -26,7 +26,7 @@ export async function findOrCreateAuth(email: string): Promise<Auth> {
   }
 }
 
-export async function sendCode(email: string) {
+export async function sendCode(email: string): Promise<{ emailSent: Boolean }> {
   const auth = await findOrCreateAuth(email);
   if (!auth) return null;
 

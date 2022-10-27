@@ -2,6 +2,13 @@ import { firestore } from "lib/firestore";
 import isAfter from "date-fns/isAfter";
 const collection = firestore.collection("auth");
 
+type DataPropos = {
+  email: string;
+  userId: string;
+  code: "" | number;
+  expires: Date;
+};
+
 export class Auth {
   ref: FirebaseFirestore.DocumentReference;
   data: any;
@@ -37,7 +44,7 @@ export class Auth {
     }
   }
 
-  static async createNewAuth(data) {
+  static async createNewAuth(data: DataPropos) {
     const newUserSnap = await collection.add(data);
     const newUser = new Auth(newUserSnap.id);
     newUser.data = data;

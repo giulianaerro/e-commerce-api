@@ -8,7 +8,20 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "next"
+    "start": "next",
+    "test": "ava"
+  },"ava": {
+    "nodeArguments": [
+      "--loader=esbuild-node-loader",
+      "--experimental-specifier-resolution=node"
+    ],
+    "environmentVariables": {
+      "TESTING": "true",
+      "JWT_SECRET": "false-jwt-token-ava-test"
+    },
+    "extensions": {
+      "ts": "module"
+    }
   },
   "dependencies": {
     "@sendgrid/mail": "^7.7.0",

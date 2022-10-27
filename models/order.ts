@@ -23,7 +23,7 @@ export class Order {
     newOrder.data = newOrderData;
     return newOrder;
   }
-  static async getOrderById(orderId) {
+  static async getOrderById(orderId: string) {
     const orderById = await collection.doc(orderId).get();
     return orderById.data();
   }
