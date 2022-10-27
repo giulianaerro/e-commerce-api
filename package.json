@@ -1,7 +1,6 @@
 {
   "name": "e-commerce-api",
   "version": "1.0.0",
-  "main": "index.js",
   "repository": "git@github.com:giulianaerro/api-next.git",
   "author": "Giuliana Erro <giulierro7@gmail.com>",
   "license": "MIT",
