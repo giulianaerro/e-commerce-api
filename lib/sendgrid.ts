@@ -115,7 +115,7 @@ export async function sendEmail(to: string, subject: string, content: string) {
     subject,
     html: content,
   };
-  sgMail
+  await sgMail
     .send(message)
     .then(() => {
       console.log("Email sent");
@@ -125,4 +125,3 @@ export async function sendEmail(to: string, subject: string, content: string) {
     });
   return true;
 }
-export { sgMail };
