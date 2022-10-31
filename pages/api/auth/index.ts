@@ -11,8 +11,8 @@ const EndpointQuerySchema = z
 
 const handler = byMethod({
   async post(req: NextApiRequest, res: NextApiResponse) {
-    const { email } = EndpointQuerySchema.parse(req.body);
     try {
+      const { email } = EndpointQuerySchema.parse(req.body);
       const result = await sendCode(email);
       res.send(result);
     } catch (error) {

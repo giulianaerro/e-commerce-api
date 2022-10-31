@@ -13,8 +13,8 @@ const EndpointQuerySchema = z
 
 const handler = byMethod({
   async post(req: NextApiRequest, res: NextApiResponse) {
-    const { email, code } = EndpointQuerySchema.parse(req.body);
     try {
+      const { email, code } = EndpointQuerySchema.parse(req.body);
       const auth = await Auth.findByEmailByCode(email, code);
       if (!auth) {
         res.status(404).send({ message: "email o codigo no coinciden" });
