@@ -16,15 +16,11 @@ const handler = byMethod({
     try {
       const { email, code } = EndpointQuerySchema.parse(req.body);
       const auth = await Auth.findByEmailByCode(email, code);
-      if (!auth) {
-        res.status(404).send({ message: "email o codigo no coinciden" });
-      }
-
       const token = await checkCodeExpires(auth);
 
       res.send(token);
     } catch (error) {
-      res.status(404).send(error);
+      res.status(404).send({ message: "email o codigo no coinciden" });
     }
   },
 });
