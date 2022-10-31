@@ -25,7 +25,7 @@ export async function merchantOrder(id) {
       "Confirmación de compra",
       paymentConfirmation
     );
-    return { emailSent };
+    return { emailSent, order };
   }
 }
 export async function getMerchantOrder(id) {
