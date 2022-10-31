@@ -8,14 +8,14 @@ export function authMiddleware(callback) {
     const token = parseToken(req);
     if (!token) {
       res.status(401).send({ message: "no autorizado" });
-    }
-
-    const decodedToken = decode(token);
-
-    if (decodedToken) {
-      callback(req, res, decodedToken);
     } else {
-      res.status(401).send({ message: "token incorrecto" });
+      const decodedToken = decode(token);
+
+      if (decodedToken) {
+        callback(req, res, decodedToken);
+      } else {
+        res.status(401).send({ message: "token incorrecto" });
+      }
     }
   };
 }

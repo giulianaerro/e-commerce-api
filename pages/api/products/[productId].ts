@@ -11,9 +11,8 @@ const EndpointQuerySchema = z
 
 const handler = byMethod({
   async get(req: NextApiRequest, res: NextApiResponse) {
-    const { productId } = EndpointQuerySchema.parse(req.query);
-
     try {
+      const { productId } = EndpointQuerySchema.parse(req.query);
       const productById = await getProductById(productId);
       res.status(200).json(productById);
     } catch (error) {
