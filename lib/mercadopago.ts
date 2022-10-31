@@ -20,11 +20,12 @@ export async function merchantOrder(id) {
     const user = await Users.getUserDataById(orderById.userId);
 
     const paymentConfirmation = paymentConfirmationEmail();
-    await sendEmail(
+    const emailSent = await sendEmail(
       user.data.email,
       "Confirmación de compra",
       paymentConfirmation
     );
+    return { emailSent };
   }
 }
 export async function getMerchantOrder(id) {
