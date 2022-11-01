@@ -37,7 +37,7 @@ export async function newOrder({
       },
     ],
     notification_url:
-      "https://webhook.site/17a6335e-087b-4fe0-8b3c-bb61b5a7ccdf",
+      "https://e-commerce-api-ten.vercel.app/api/ipn/mercadopago",
     back_urls: {
       success: "https://apx.school/",
     },
